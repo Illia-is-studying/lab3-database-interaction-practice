@@ -2,12 +2,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
-</head>
+    <title>Initial</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous">
+
 <body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <h1 class="text-center">Routes</h1>
+            <div class="mx-auto d-flex justify-content-around">
+                <a href="tables-initialization-servlet" class="btn btn-outline-dark">Tables Initialization</a>
+                <%--                <a href="cars-details-servlet" class="btn btn-outline-dark">Details</a>--%>
+                <%--                <a href="cars-servlet" class="btn btn-outline-dark">Cars</a>--%>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
