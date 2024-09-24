@@ -1,5 +1,10 @@
 package com.example.lab3databaseinteractionpractice.Services;
 
+import com.example.lab3databaseinteractionpractice.Models.Buyer;
+
+import java.util.Arrays;
+import java.util.List;
+
 public class BuyersTableService {
     private final DatabaseService databaseService;
     private String sql;
@@ -8,9 +13,16 @@ public class BuyersTableService {
         this.databaseService = new DatabaseService();
     }
 
+    public List<String> getHeaders() {
+        return Arrays.asList("Id",
+                "Buyer Name",
+                "Contact Phone",
+                "Contact Email");
+    }
+
     public String tableInitialization() {
         String createSql = "CREATE TABLE Buyers ("
-                + "BuyerID INT PRIMARY KEY AUTO_INCREMENT, "
+                + "Id INT PRIMARY KEY AUTO_INCREMENT, "
                 + "BuyerName VARCHAR(255) NOT NULL, "
                 + "ContactPhone VARCHAR(20) NOT NULL, "
                 + "ContactEmail VARCHAR(255) NOT NULL"
@@ -22,5 +34,51 @@ public class BuyersTableService {
                 + "('James Rodriguez', '111-987-6543', 'jamesrodriguez@example.com'), "
                 + "('Linda Lee', '999-888-7777', 'lindalee@example.com');";
         return databaseService.tableInitialization(createSql, insertSql, "Buyers");
+    }
+
+
+    public List<List<String>> getAllBuyersAfterSettingQuery() {
+        return databaseService.getAllEntitiesBySql(sql);
+    }
+
+    public void deleteBuyerById(String id) {
+        sql = "DELETE FROM Buyers WHERE Id = '" + id + "';";
+        databaseService.executeUpdateBySql(sql);
+    }
+
+    public Buyer getBuyerById(String id) {
+        sql = "SELECT * FROM Buyers WHERE Id = " + id + ";";
+        List<List<String>> entities = getAllBuyersAfterSettingQuery();
+
+        Buyer buyer = new Buyer();
+        try {
+            List<String> entity = entities.get(0);
+            buyer = ListConverterService.getObjectByListString(entity, buyer);
+        } catch (IndexOutOfBoundsException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return buyer;
+    }
+
+    public void addBuyer(Buyer buyer) {
+        sql = "INSERT INTO Buyers (BuyerName, ContactPhone, ContactEmail) VALUES('"
+                + buyer.getName() + "', '"
+                + buyer.getContactPhone() + "', '"
+                + buyer.getContactEmail() + "');";
+        databaseService.executeUpdateBySql(sql);
+    }
+
+    public void updateBuyer(Buyer buyer) {
+        sql = "UPDATE Buyers " +
+                "SET BuyerName = '" + buyer.getName() +
+                "', ContactPhone = '" + buyer.getContactPhone() +
+                "', ContactEmail = '" + buyer.getContactEmail() +
+                "' WHERE Id = '" + buyer.getId() + "';";
+        databaseService.executeUpdateBySql(sql);
+    }
+
+    public void setInitialQuery() {
+        sql = "SELECT * FROM Buyers";
     }
 }

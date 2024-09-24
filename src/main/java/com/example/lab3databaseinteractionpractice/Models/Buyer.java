@@ -1,39 +1,39 @@
 package com.example.lab3databaseinteractionpractice.Models;
 
 public class Buyer {
-    private int buyerID;
-    private String buyerName;
+    private int id;
+    private String name;
     private String contactPhone;
     private String contactEmail;
 
     public Buyer() {
-        this.buyerID = 0;
-        this.buyerName = "";
+        this.id = 0;
+        this.name = "";
         this.contactPhone = "";
         this.contactEmail = "";
     }
 
-    public Buyer(int buyerID, String buyerName, String contactPhone, String contactEmail) {
-        this.buyerID = buyerID;
-        this.buyerName = buyerName;
+    public Buyer(int id, String name, String contactPhone, String contactEmail) {
+        this.id = id;
+        this.name = name;
         this.contactPhone = contactPhone;
         this.contactEmail = contactEmail;
     }
 
-    public int getBuyerID() {
-        return buyerID;
+    public int getId() {
+        return id;
     }
 
-    public void setBuyerID(int buyerID) {
-        this.buyerID = buyerID;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getBuyerName() {
-        return buyerName;
+    public String getName() {
+        return name;
     }
 
-    public void setBuyerName(String buyerName) {
-        this.buyerName = buyerName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getContactPhone() {
