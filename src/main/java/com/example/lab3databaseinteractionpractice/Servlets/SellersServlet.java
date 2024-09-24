@@ -1,6 +1,6 @@
 package com.example.lab3databaseinteractionpractice.Servlets;
 
-import com.example.lab3databaseinteractionpractice.Models.Seller;
+import com.example.lab3databaseinteractionpractice.Models.Trader;
 import com.example.lab3databaseinteractionpractice.Services.SellersTableService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -36,19 +36,20 @@ public class SellersServlet extends HttpServlet {
             request.setAttribute("rowsAttr", sellerRows);
             request.setAttribute("headersAttr", sellersTableService.getHeaders());
             request.getRequestDispatcher("table.jsp").forward(request, response);
-        } else if (method.equals("post")) {
-            Seller seller = new Seller();
-            request.setAttribute("seller", seller);
-            request.getRequestDispatcher("sellerForm.jsp").forward(request, response);
-        } else if (method.equals("put")) {
-            Seller seller = sellersTableService.getSellerById(id);
+        } else if (method.equals("post") || method.equals("put")) {
+            Trader seller = new Trader();
 
-            request.setAttribute("seller", seller);
-            if (seller.getSellerID() < 1) {
-                request.setAttribute("method", "post");
+            if (method.equals("put")) {
+                seller = sellersTableService.getSellerById(id);
+
+                if (seller.getId() < 1) {
+                    request.setAttribute("method", "post");
+                }
             }
 
-            request.getRequestDispatcher("sellerForm.jsp").forward(request, response);
+            request.setAttribute("formName", "Seller");
+            request.setAttribute("trader", seller);
+            request.getRequestDispatcher("traderForm.jsp").forward(request, response);
         } else {
             if (method.equals("delete")) {
                 sellersTableService.deleteSellerById(id);
@@ -66,11 +67,11 @@ public class SellersServlet extends HttpServlet {
         request.setAttribute("id", id);
 
         if (method != null) {
-            String sellerName = request.getParameter("sellerName");
+            String sellerName = request.getParameter("traderName");
             String contactPhone = request.getParameter("contactPhone");
             String contactEmail = request.getParameter("contactEmail");
 
-            Seller seller = new Seller(
+            Trader seller = new Trader(
                     Integer.parseInt(id),
                     sellerName,
                     contactPhone,

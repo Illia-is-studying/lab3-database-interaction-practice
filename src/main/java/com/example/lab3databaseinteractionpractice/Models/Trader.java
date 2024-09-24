@@ -1,19 +1,19 @@
 package com.example.lab3databaseinteractionpractice.Models;
 
-public class Buyer {
+public class Trader {
     private int id;
     private String name;
     private String contactPhone;
     private String contactEmail;
 
-    public Buyer() {
+    public Trader() {
         this.id = 0;
         this.name = "";
         this.contactPhone = "";
         this.contactEmail = "";
     }
 
-    public Buyer(int id, String name, String contactPhone, String contactEmail) {
+    public Trader(int id, String name, String contactPhone, String contactEmail) {
         this.id = id;
         this.name = name;
         this.contactPhone = contactPhone;

@@ -1,4 +1,4 @@
-<%@ page import="com.example.lab3databaseinteractionpractice.Models.Seller" %>
+<%@ page import="com.example.lab3databaseinteractionpractice.Models.Trader" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -11,26 +11,27 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-8 mx-auto">
+            <h1>${formName} Form</h1>
             <form method="post" action="sellers-servlet">
-                <input type="hidden" value="${seller.sellerID}" name="id">
+                <input type="hidden" value="${trader.id}" name="id">
                 <input type="hidden" value="${method}" name="method">
 
                 <div class="mb-3">
-                    <label class="form-label" for="sellerName">Seller Name</label>
-                    <input type="text" class="form-control" id="sellerName"
-                           value="${seller.sellerName}" name="sellerName" required>
+                    <label class="form-label" for="traderName">Name</label>
+                    <input type="text" class="form-control" id="traderName"
+                           value="${trader.name}" name="traderName" required>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="contactPhone">Contact Phone</label>
                     <input type="text" class="form-control" id="contactPhone"
-                           value="${seller.contactPhone}" name="contactPhone">
+                           value="${trader.contactPhone}" name="contactPhone">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="contactEmail">Contact Email</label>
                     <input type="text" class="form-control" id="contactEmail"
-                           value="${seller.contactEmail}" name="contactEmail">
+                           value="${trader.contactEmail}" name="contactEmail">
                 </div>
 
                 <button type="submit" class="btn btn-outline-primary">Submit</button>

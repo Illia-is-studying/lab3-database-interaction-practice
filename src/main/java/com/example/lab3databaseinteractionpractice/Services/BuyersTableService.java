@@ -1,6 +1,6 @@
 package com.example.lab3databaseinteractionpractice.Services;
 
-import com.example.lab3databaseinteractionpractice.Models.Buyer;
+import com.example.lab3databaseinteractionpractice.Models.Trader;
 
 import java.util.Arrays;
 import java.util.List;
@@ -46,11 +46,11 @@ public class BuyersTableService {
         databaseService.executeUpdateBySql(sql);
     }
 
-    public Buyer getBuyerById(String id) {
+    public Trader getBuyerById(String id) {
         sql = "SELECT * FROM Buyers WHERE Id = " + id + ";";
         List<List<String>> entities = getAllBuyersAfterSettingQuery();
 
-        Buyer buyer = new Buyer();
+        Trader buyer = new Trader();
         try {
             List<String> entity = entities.get(0);
             buyer = ListConverterService.getObjectByListString(entity, buyer);
@@ -61,7 +61,7 @@ public class BuyersTableService {
         return buyer;
     }
 
-    public void addBuyer(Buyer buyer) {
+    public void addBuyer(Trader buyer) {
         sql = "INSERT INTO Buyers (BuyerName, ContactPhone, ContactEmail) VALUES('"
                 + buyer.getName() + "', '"
                 + buyer.getContactPhone() + "', '"
@@ -69,7 +69,7 @@ public class BuyersTableService {
         databaseService.executeUpdateBySql(sql);
     }
 
-    public void updateBuyer(Buyer buyer) {
+    public void updateBuyer(Trader buyer) {
         sql = "UPDATE Buyers " +
                 "SET BuyerName = '" + buyer.getName() +
                 "', ContactPhone = '" + buyer.getContactPhone() +

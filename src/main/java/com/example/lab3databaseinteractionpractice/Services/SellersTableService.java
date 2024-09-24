@@ -1,6 +1,6 @@
 package com.example.lab3databaseinteractionpractice.Services;
 
-import com.example.lab3databaseinteractionpractice.Models.Seller;
+import com.example.lab3databaseinteractionpractice.Models.Trader;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,11 +45,11 @@ public class SellersTableService {
         databaseService.executeUpdateBySql(sql);
     }
 
-    public Seller getSellerById(String id) {
+    public Trader getSellerById(String id) {
         sql = "SELECT * FROM Sellers WHERE Id = " + id + ";";
         List<List<String>> entities = getAllSellersAfterSettingQuery();
 
-        Seller seller = new Seller();
+        Trader seller = new Trader();
         try {
             List<String> entity = entities.get(0);
             seller = ListConverterService.getObjectByListString(entity, seller);
@@ -60,20 +60,20 @@ public class SellersTableService {
         return seller;
     }
 
-    public void addSeller(Seller seller) {
+    public void addSeller(Trader seller) {
         sql = "INSERT INTO Sellers (SellerName, ContactPhone, ContactEmail) VALUES('"
-                + seller.getSellerName() + "', '"
+                + seller.getName() + "', '"
                 + seller.getContactPhone() + "', '"
                 + seller.getContactEmail() + "');";
         databaseService.executeUpdateBySql(sql);
     }
 
-    public void updateSeller(Seller seller) {
+    public void updateSeller(Trader seller) {
         sql = "UPDATE Sellers " +
-                "SET SellerName = '" + seller.getSellerName() +
+                "SET SellerName = '" + seller.getName() +
                 "', ContactPhone = '" + seller.getContactPhone() +
                 "', ContactEmail = '" + seller.getContactEmail() +
-                "' WHERE Id = '" + seller.getSellerID() + "';";
+                "' WHERE Id = '" + seller.getId() + "';";
         databaseService.executeUpdateBySql(sql);
     }
 
