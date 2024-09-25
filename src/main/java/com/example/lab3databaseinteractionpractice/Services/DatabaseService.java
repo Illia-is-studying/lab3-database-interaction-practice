@@ -1,5 +1,7 @@
 package com.example.lab3databaseinteractionpractice.Services;
 
+import com.example.lab3databaseinteractionpractice.Models.SqlResult;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +89,7 @@ public class DatabaseService {
         return entities;
     }
 
-    public void executeUpdateBySql(String sql) {
+    public SqlResult executeUpdateBySql(String sql) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -96,8 +98,12 @@ public class DatabaseService {
 
                 statement.executeUpdate(sql);
             }
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            return SqlResult.DELETE_ERROR;
         } catch (Exception ex) {
             System.out.println("\n\n\n" + ex.getMessage() + "\n\n\n");
         }
+
+        return SqlResult.OK;
     }
 }

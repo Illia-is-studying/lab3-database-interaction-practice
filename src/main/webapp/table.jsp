@@ -3,6 +3,8 @@
 <%
     List<String> headers = (List<String>) request.getAttribute("headersAttr");
     List<List<String>> rows = (List<List<String>>) request.getAttribute("rowsAttr");
+    String errorMessage = (String) request.getSession().getAttribute("errorMessage");
+    request.getSession().setAttribute("errorMessage", null);
 %>
 <html>
 <head>
@@ -14,9 +16,19 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-9 mx-auto">
+            <%if (errorMessage != null && !errorMessage.isEmpty()) {%>
+            <div class="mb-3">
+                <div class="alert alert-primary d-flex align-items-center" role="alert">
+                    <div>
+                        <%=errorMessage%>
+                    </div>
+                </div>
+            </div>
+            <%}%>
             <h1>${tableName}</h1>
             <div class="mb-3">
                 <a href="${servletName}?method=post" class="btn btn-primary">Create New</a>
+                <a href="index.jsp" class="btn btn-secondary">Go To Initial</a>
             </div>
             <table class="table table-dark table-striped">
                 <thead>

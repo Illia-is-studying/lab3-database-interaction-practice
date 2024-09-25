@@ -1,5 +1,6 @@
 package com.example.lab3databaseinteractionpractice.Services;
 
+import com.example.lab3databaseinteractionpractice.Models.SqlResult;
 import com.example.lab3databaseinteractionpractice.Models.Trader;
 
 import java.util.Arrays;
@@ -40,9 +41,9 @@ public class SellersTableService {
         return databaseService.getAllEntitiesBySql(sql);
     }
 
-    public void deleteSellerById(String id) {
+    public SqlResult deleteSellerById(String id) {
         sql = "DELETE FROM Sellers WHERE Id = '" + id + "';";
-        databaseService.executeUpdateBySql(sql);
+        return databaseService.executeUpdateBySql(sql);
     }
 
     public Trader getSellerById(String id) {

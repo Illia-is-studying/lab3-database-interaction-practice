@@ -1,5 +1,6 @@
 package com.example.lab3databaseinteractionpractice.Servlets;
 
+import com.example.lab3databaseinteractionpractice.Models.SqlResult;
 import com.example.lab3databaseinteractionpractice.Models.Trader;
 import com.example.lab3databaseinteractionpractice.Services.BuyersTableService;
 import jakarta.servlet.ServletException;
@@ -52,7 +53,13 @@ public class BuyersServlet extends HttpServlet {
             request.getRequestDispatcher("traderForm.jsp").forward(request, response);
         } else {
             if (method.equals("delete")) {
-                buyersTableService.deleteBuyerById(id);
+                SqlResult sqlResult = buyersTableService.deleteBuyerById(id);
+
+                if (sqlResult.equals(SqlResult.DELETE_ERROR)) {
+                    request.getSession().setAttribute("errorMessage",
+                            "Before deleting an item with id " + id + " from the “Buyers” table, " +
+                                    "delete all links to this item from the Sales table.");
+                }
             }
 
             response.sendRedirect("/lab3_database_interaction_practice_war_exploded/buyers-servlet");
