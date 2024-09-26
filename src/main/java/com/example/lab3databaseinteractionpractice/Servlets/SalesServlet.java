@@ -59,7 +59,27 @@ public class SalesServlet extends HttpServlet {
         request.setAttribute("buyersMap", buyersMap);
 
         if (method == null || method.equals("get")) {
+            String saleDate = request.getParameter("saleDate");
+            String saleLowerRangeDate = request.getParameter("saleLowerRangeDate");
+            String saleUpperRangeDate = request.getParameter("saleUpperRangeDate");
+            String buyerID = request.getParameter("buyerID");
+            String sellerID = request.getParameter("sellerID");
+
             salesTableService.setInitialQueryGetAll();
+
+            if (saleDate != null && !saleDate.isEmpty()) {
+                salesTableService.setSaleDateCondition(saleDate);
+            } else if (saleLowerRangeDate != null && !saleLowerRangeDate.isEmpty() &&
+                    saleUpperRangeDate != null && !saleUpperRangeDate.isEmpty()) {
+                salesTableService.setSaleDateRangeCondition(saleLowerRangeDate, saleUpperRangeDate);
+            }
+            if (buyerID != null && !buyerID.equalsIgnoreCase("all")) {
+                salesTableService.setBuyerIdCondition(buyerID);
+            }
+            if (sellerID != null && !sellerID.equalsIgnoreCase("all")) {
+                salesTableService.setSellerIdCondition(sellerID);
+            }
+
             List<List<String>> saleRows = salesTableService.getAllSalesAfterSettingQuery();
             saleRows = ListConverterService
                     .getSalesListWhereIdReplacedByName(saleRows, sellerTableService, buyersTableService);

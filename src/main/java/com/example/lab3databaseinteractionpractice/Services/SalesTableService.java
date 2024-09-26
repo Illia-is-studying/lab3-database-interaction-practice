@@ -3,6 +3,7 @@ package com.example.lab3databaseinteractionpractice.Services;
 import com.example.lab3databaseinteractionpractice.Models.Sale;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -89,7 +90,31 @@ public class SalesTableService {
         databaseService.executeUpdateBySql(sql);
     }
 
+    public void setSellerIdCondition(String id) {
+        addConditionToSql("SellerId = '" + id + "'");
+    }
+
+    public void setBuyerIdCondition(String id) {
+        addConditionToSql("BuyerId = '" + id + "'");
+    }
+
+    public void setSaleDateRangeCondition(String lowerDate, String upperDate) {
+        addConditionToSql("SaleDate BETWEEN '" + Date.valueOf(lowerDate) + "' AND '" + Date.valueOf(upperDate) + "'");
+    }
+
+    public void setSaleDateCondition(String date) {
+        addConditionToSql("SaleDate = '" + Date.valueOf(date) + "'");
+    }
+
     public void setInitialQueryGetAll() {
         sql = "SELECT * FROM Sales";
+    }
+
+    private void addConditionToSql(String condition) {
+        if (sql.contains("WHERE")) {
+            sql += " AND " + condition;
+        } else {
+            sql += " WHERE " + condition;
+        }
     }
 }
