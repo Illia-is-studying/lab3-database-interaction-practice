@@ -79,7 +79,11 @@ public class BuyersTableService {
         databaseService.executeUpdateBySql(sql);
     }
 
-    public void setInitialQuery() {
+    public void setInitialQueryGetAll() {
         sql = "SELECT * FROM Buyers";
+    }
+
+    public void setInitialQueryGetIdAndName() {
+        sql = "SELECT Buyers.id, Buyers.BuyerName FROM Buyers";
     }
 }

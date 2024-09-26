@@ -14,6 +14,7 @@
             <h1 class="text-center">Routes</h1>
             <div class="mx-auto d-flex justify-content-around">
                 <a href="tables-initialization-servlet" class="btn btn-outline-dark">Tables Initialization</a>
+                <a href="sales-servlet" class="btn btn-outline-dark">Sales</a>
                 <a href="sellers-servlet" class="btn btn-outline-dark">Sellers</a>
                 <a href="buyers-servlet" class="btn btn-outline-dark">Buyers</a>
             </div>

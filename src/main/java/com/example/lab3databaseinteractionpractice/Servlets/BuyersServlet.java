@@ -29,14 +29,14 @@ public class BuyersServlet extends HttpServlet {
         request.setAttribute("method", method);
 
         if (method == null || method.equals("get")) {
-            buyersTableService.setInitialQuery();
+            buyersTableService.setInitialQueryGetAll();
             List<List<String>> buyersRows = buyersTableService.getAllBuyersAfterSettingQuery();
 
             request.setAttribute("tableName", "Buyers Table");
             request.setAttribute("servletName", "buyers-servlet");
             request.setAttribute("rowsAttr", buyersRows);
             request.setAttribute("headersAttr", buyersTableService.getHeaders());
-            request.getRequestDispatcher("table.jsp").forward(request, response);
+            request.getRequestDispatcher("traders.jsp").forward(request, response);
         } else if (method.equals("post") || method.equals("put")) {
             Trader buyer = new Trader();
 

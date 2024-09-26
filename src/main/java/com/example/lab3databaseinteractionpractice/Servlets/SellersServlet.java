@@ -8,7 +8,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,14 +29,14 @@ public class SellersServlet extends HttpServlet {
         request.setAttribute("method", method);
 
         if (method == null || method.equals("get")) {
-            sellersTableService.setInitialQuery();
+            sellersTableService.setInitialQueryGetAll();
             List<List<String>> sellerRows = sellersTableService.getAllSellersAfterSettingQuery();
 
             request.setAttribute("tableName", "Sellers Table");
             request.setAttribute("servletName", "sellers-servlet");
             request.setAttribute("rowsAttr", sellerRows);
             request.setAttribute("headersAttr", sellersTableService.getHeaders());
-            request.getRequestDispatcher("table.jsp").forward(request, response);
+            request.getRequestDispatcher("traders.jsp").forward(request, response);
         } else if (method.equals("post") || method.equals("put")) {
             Trader seller = new Trader();
 

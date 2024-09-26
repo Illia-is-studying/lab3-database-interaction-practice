@@ -1,6 +1,5 @@
 package com.example.lab3databaseinteractionpractice.Models;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Sale {
